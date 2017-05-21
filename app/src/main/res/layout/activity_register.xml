@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                        android:orientation="vertical"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@mipmap/login_bk"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginRight="20dp"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@mipmap/login_bk"
+              android:layout_marginLeft="20dp"
+              android:layout_marginRight="20dp"
     >
     <ImageView
         android:layout_width="60dp"
@@ -29,6 +29,14 @@
         android:hint="@string/password"
         android:layout_marginTop="10dp"
         android:inputType="numberPassword"
+        android:imeOptions="actionNext"/>
+    <EditText
+        android:id="@id/confirm_password"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:hint="@string/confirm_password"
+        android:layout_marginTop="10dp"
+        android:inputType="numberPassword"
         android:imeOptions="actionDone"/>
     <Button
         android:id="@id/btn_login"
@@ -39,16 +47,8 @@
         android:background="@drawable/btn_login_selector"
         android:layout_marginBottom="10dp"
         android:layout_marginTop="10dp"
-        android:text="@string/login"
+        android:text="@string/register"
         />
-    <TextView
-        android:id="@id/new_user"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/qq_blue"
-        android:text="@string/new_user"
-        android:layout_marginTop="30dp"
-        android:layout_marginRight="20dp"
-        android:layout_gravity="right"/>
+
 
 </LinearLayout>

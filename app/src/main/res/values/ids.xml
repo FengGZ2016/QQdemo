@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <item name="splash_view" type="id"/>
+    <item name="user_name" type="id">edit_username</item>
+    <item name="password" type="id">edit_password</item>
+    <item name="btn_login" type="id">btn_login</item>
+    <item name="new_user" type="id">textview_newuser</item>
+    <item name="confirm_password" type="id">confirm_password</item>
 </resources>
