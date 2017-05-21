@@ -1,8 +1,12 @@
 package com.example.administrator.qqdemo.presenter.impl;
 
+import android.util.Log;
+
 import com.example.administrator.qqdemo.presenter.RegisterPresenter;
 import com.example.administrator.qqdemo.util.StringUtil;
 import com.example.administrator.qqdemo.view.RegisterView;
+import com.hyphenate.chat.EMClient;
+import com.hyphenate.exceptions.HyphenateException;
 
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.exception.BmobException;
@@ -14,6 +18,7 @@ import cn.bmob.v3.listener.SaveListener;
 
 public class RegisterPresenterImpl implements RegisterPresenter{
     private RegisterView registerView;
+    private final String TAG="RegisterPresenterImpl";
 
     public RegisterPresenterImpl(RegisterView registerView){
         this.registerView=registerView;
@@ -53,7 +58,7 @@ public class RegisterPresenterImpl implements RegisterPresenter{
     /**
      * 注册到Bmob
      * */
-    private void registerBmob(String userName, String password) {
+    private void registerBmob(final String userName, final String password) {
         BmobUser user=new BmobUser();
         user.setUsername(userName);
         user.setPassword(password);
@@ -62,12 +67,32 @@ public class RegisterPresenterImpl implements RegisterPresenter{
             public void done(BmobUser bmobUser, BmobException e) {
                 if (e==null){
                     //注册成功,通知view层
-                    registerView.onRegisterSuccess();
+                   // registerView.onRegisterSuccess();
+                    //注册环信
+                    registerEaseMob(userName,password);
                 }else {
                     //注册失败，通知view层
                     registerView.onRegisterFailed();
                 }
             }
         });
+    }
+
+    private void registerEaseMob(final String userName, final String password) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                //注册失败会抛出HyphenateException
+                try {
+                    EMClient.getInstance().createAccount(userName, password);//同步方法
+                    //不抛异常表示注册成功
+                    Log.d(TAG, "run: 注册成功" );
+                } catch (HyphenateException e) {
+                    e.printStackTrace();
+                    //注册失败
+                    Log.d(TAG, "run: 注册失败");
+                }
+            }
+        }).start();
     }
 }

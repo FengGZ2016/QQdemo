@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
+import butterknife.ButterKnife;
+
 /**
  * Created by Administrator on 2017/5/10.
  * 基类:主要用来封装一些公共的功能
@@ -19,6 +21,7 @@ public abstract class BaseActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         //由子类传一个布局
         setContentView(getLayoutResId());
+        ButterKnife.bind(this);
         //初始化方法
         init();
     }

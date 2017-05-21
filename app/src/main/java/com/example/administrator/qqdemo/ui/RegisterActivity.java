@@ -1,6 +1,5 @@
 package com.example.administrator.qqdemo.ui;
 
-import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
@@ -14,7 +13,6 @@ import com.example.administrator.qqdemo.presenter.impl.RegisterPresenterImpl;
 import com.example.administrator.qqdemo.view.RegisterView;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
@@ -40,17 +38,15 @@ public class RegisterActivity extends BaseActivity implements RegisterView{
         return R.layout.activity_register;
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        ButterKnife.bind(this);
-    }
+
 
     @Override
     protected void init() {
         super.init();
         registerPresenter=new RegisterPresenterImpl(this);
         //设置软件盘ACTION键的监听器，当用户输入完确认密码后，点击软件盘的完成按钮，同样触发注册
+        mConfirmPassword.setOnEditorActionListener(mOnEditorActionListener);
+
         mConfirmPassword.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
@@ -62,6 +58,16 @@ public class RegisterActivity extends BaseActivity implements RegisterView{
             }
         });
     }
+    private TextView.OnEditorActionListener mOnEditorActionListener = new TextView.OnEditorActionListener() {
+        @Override
+        public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                register();//注册
+                return true;//处理事件
+            }
+            return false;
+        }
+    };
 
     @OnClick(R.id.btn_register)
     public void onClick() {
