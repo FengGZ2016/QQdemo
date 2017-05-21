@@ -6,4 +6,7 @@
     <string name="new_user">新用户</string>
     <string name="confirm_password">确认密码</string>
     <string name="register">注册</string>
+    <string name="user_name_error">用户名不合法，必须长度3-20，首字符英文字符</string>
+    <string name="password_error">密码不合法，必须3-20位的数字</string>
+    <string name="confirm_password_error">密码不一致</string>
 </resources>
