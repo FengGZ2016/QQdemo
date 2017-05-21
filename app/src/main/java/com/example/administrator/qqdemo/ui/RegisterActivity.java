@@ -27,16 +27,7 @@ public class RegisterActivity extends BaseActivity {
     @BindView(R.id.btn_register)
     Button mBtnRegister;
 
-    private TextView.OnEditorActionListener mOnEditorActionListener = new TextView.OnEditorActionListener() {
-        @Override
-        public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-            if (actionId == EditorInfo.IME_ACTION_DONE) {
-                register();//注册
-                return true;//处理事件
-            }
-            return false;
-        }
-    };
+
 
     @Override
     public int getLayoutResId() {
@@ -53,7 +44,16 @@ public class RegisterActivity extends BaseActivity {
     protected void init() {
         super.init();
         //设置软件盘ACTION键的监听器，当用户输入完确认密码后，点击软件盘的完成按钮，同样触发注册
-        mConfirmPassword.setOnEditorActionListener(mOnEditorActionListener);
+        mConfirmPassword.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_DONE) {
+                    register();
+                    return true;
+                }
+                return false;
+            }
+        });
     }
 
     @OnClick(R.id.btn_register)
@@ -64,5 +64,7 @@ public class RegisterActivity extends BaseActivity {
 
     private void register() {
         String username=mUserName.getText().toString().trim();
+        String pass=mPassword.getText().toString().trim();
+        String confirmPass=mConfirmPassword.getText().toString().trim();
     }
 }
