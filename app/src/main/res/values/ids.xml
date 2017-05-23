@@ -7,4 +7,6 @@
     <item name="new_user" type="id">textview_newuser</item>
     <item name="confirm_password" type="id">confirm_password</item>
     <item name="btn_register" type="id">btn_register</item>
+    <item name="bottomBar" type="id">bottombar</item>
+    <item name="fragment_container" type="id">frameLayout_container</item>
 </resources>
