@@ -1,4 +1,4 @@
-package com.example.administrator.qqdemo.ui;
+package com.example.administrator.qqdemo.ui.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
