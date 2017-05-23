@@ -16,4 +16,6 @@ public interface RegisterView {
     void onUserNameError();
 
     void onConfirmPasswordError();
+
+    void onStartRegister();
 }

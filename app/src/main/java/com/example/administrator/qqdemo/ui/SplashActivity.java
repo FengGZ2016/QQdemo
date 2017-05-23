@@ -1,6 +1,5 @@
 package com.example.administrator.qqdemo.ui;
 
-import android.content.Intent;
 import android.os.Handler;
 
 import com.example.administrator.qqdemo.MainActivity;
@@ -47,8 +46,9 @@ public class SplashActivity extends BaseActivity implements SplashView{
         mhandler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent=new Intent(SplashActivity.this,LoginActivity.class);
-                startActivity(intent);
+//                Intent intent=new Intent(SplashActivity.this,LoginActivity.class);
+//                startActivity(intent);
+                goTo(LoginActivity.class);
                 finish();
             }
         },DELAY);
@@ -58,8 +58,9 @@ public class SplashActivity extends BaseActivity implements SplashView{
      * 跳转到主界面
      * */
     private void navigateToMain() {
-        Intent intent=new Intent(SplashActivity.this, MainActivity.class);
-        startActivity(intent);
+//        Intent intent=new Intent(SplashActivity.this, MainActivity.class);
+//        startActivity(intent);
+        goTo(MainActivity.class);
         finish();
     }
 

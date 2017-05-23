@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.example.administrator.qqdemo.presenter.RegisterPresenter;
 import com.example.administrator.qqdemo.util.StringUtil;
+import com.example.administrator.qqdemo.util.ThreadUtil;
 import com.example.administrator.qqdemo.view.RegisterView;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.exceptions.HyphenateException;
@@ -34,7 +35,8 @@ public class RegisterPresenterImpl implements RegisterPresenter{
                 //密码正确
                 //检查密码和确认密码是否一致
                 if (password.equals(confirmPassword)) {
-                    //完全ok
+                    //完全ok,通知view层开始注册，弹出进度条
+                    registerView.onStartRegister();
                     registerBmob(userName, password);
                 } else {
                     //确认密码出错
@@ -78,8 +80,11 @@ public class RegisterPresenterImpl implements RegisterPresenter{
         });
     }
 
+    /**
+     * 注册到环信
+     * */
     private void registerEaseMob(final String userName, final String password) {
-        new Thread(new Runnable() {
+ /*       new Thread(new Runnable() {
             @Override
             public void run() {
                 //注册失败会抛出HyphenateException
@@ -87,12 +92,49 @@ public class RegisterPresenterImpl implements RegisterPresenter{
                     EMClient.getInstance().createAccount(userName, password);//同步方法
                     //不抛异常表示注册成功
                     Log.d(TAG, "run: 注册成功" );
+                    //不能在子线程中操作view层
+                    //registerView.onRegisterSuccess();
                 } catch (HyphenateException e) {
                     e.printStackTrace();
                     //注册失败
                     Log.d(TAG, "run: 注册失败");
+                    //不能在子线程中操作view层
+                   // registerView.onRegisterFailed();
                 }
             }
-        }).start();
+        }).start();*/
+
+
+        /**
+         * 开启一个子线程去注册环信
+         * */
+        ThreadUtil.runOnBackgroundThread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    EMClient.getInstance().createAccount(userName, password);//同步方法
+                    //不抛异常表示注册成功
+                    Log.d(TAG, "run: 注册成功" );
+                    //通知View层，必须要在主线程上操作
+                    ThreadUtil.runOnMainThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            registerView.onRegisterSuccess();
+                        }
+                    });
+                }catch (HyphenateException e){
+                    e.printStackTrace();
+                    //注册失败
+                    Log.d(TAG, "run: 注册失败");
+                    //通知View层，必须要在主线程上操作
+                    ThreadUtil.runOnMainThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            registerView.onRegisterFailed();
+                        }
+                    });
+                }
+            }
+        });
     }
 }

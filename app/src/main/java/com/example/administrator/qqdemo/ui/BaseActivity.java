@@ -1,8 +1,11 @@
 package com.example.administrator.qqdemo.ui;
 
+import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.view.inputmethod.InputMethodManager;
 
 import butterknife.ButterKnife;
 
@@ -12,7 +15,7 @@ import butterknife.ButterKnife;
  */
 
 public abstract class BaseActivity extends AppCompatActivity{
-
+    private ProgressDialog mProgressDialog;//进度条
     /**
      * 注意：要选择带一个参数的方法
      * */
@@ -41,4 +44,41 @@ public abstract class BaseActivity extends AppCompatActivity{
     public abstract int getLayoutResId();
 
 
+    /**
+     * 跳转Activity
+     * */
+    public void goTo(Class activity) {
+        Intent intent = new Intent(this, activity);
+        startActivity(intent);
+        finish();
+    }
+
+    /**
+     * 弹出进度条
+     * @param msg
+     */
+    public void showProgressDialog(String msg) {
+        if (mProgressDialog == null) {
+            mProgressDialog = new ProgressDialog(this);
+        }
+        mProgressDialog.setMessage(msg);
+        mProgressDialog.show();
+    }
+
+
+    /**
+     * 隐藏进度条
+     * */
+    public void hideProgressDialog() {
+        mProgressDialog.hide();
+    }
+
+
+    /**
+     * 隐藏软键盘
+     * */
+    public void hideKeyboard() {
+        InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+    }
 }

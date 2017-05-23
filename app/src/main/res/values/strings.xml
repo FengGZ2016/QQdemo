@@ -9,4 +9,6 @@
     <string name="user_name_error">用户名不合法，必须长度3-20，首字符英文字符</string>
     <string name="password_error">密码不合法，必须3-20位的数字</string>
     <string name="confirm_password_error">密码不一致</string>
+    <string name="register_progress">正在注册...</string>
+    <string name="logining">正在登录...</string>
 </resources>

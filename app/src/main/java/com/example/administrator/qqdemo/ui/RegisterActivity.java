@@ -47,16 +47,16 @@ public class RegisterActivity extends BaseActivity implements RegisterView{
         //设置软件盘ACTION键的监听器，当用户输入完确认密码后，点击软件盘的完成按钮，同样触发注册
         mConfirmPassword.setOnEditorActionListener(mOnEditorActionListener);
 
-        mConfirmPassword.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if (actionId == EditorInfo.IME_ACTION_DONE) {
-                    register();
-                    return true;
-                }
-                return false;
-            }
-        });
+//        mConfirmPassword.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+//            @Override
+//            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+//                if (actionId == EditorInfo.IME_ACTION_DONE) {
+//                    register();
+//                    return true;
+//                }
+//                return false;
+//            }
+//        });
     }
     private TextView.OnEditorActionListener mOnEditorActionListener = new TextView.OnEditorActionListener() {
         @Override
@@ -79,6 +79,8 @@ public class RegisterActivity extends BaseActivity implements RegisterView{
         String username=mUserName.getText().toString().trim();
         String pass=mPassword.getText().toString().trim();
         String confirmPass=mConfirmPassword.getText().toString().trim();
+        //隐藏软件盘
+        hideKeyboard();
         registerPresenter.register(username,pass,confirmPass);
 
 
@@ -90,6 +92,10 @@ public class RegisterActivity extends BaseActivity implements RegisterView{
     @Override
     public void onRegisterSuccess() {
         Toast.makeText(this, "注册成功", Toast.LENGTH_SHORT).show();
+        //隐藏进度条
+        hideProgressDialog();
+        //注册成功之后跳转到登录界面
+        goTo(LoginActivity.class);
     }
 
     /**
@@ -113,5 +119,13 @@ public class RegisterActivity extends BaseActivity implements RegisterView{
     @Override
     public void onConfirmPasswordError() {
         mConfirmPassword.setError(getString(R.string.confirm_password_error));
+    }
+
+    /**
+     * 开始注册时，弹出进度条
+     * */
+    @Override
+    public void onStartRegister() {
+        showProgressDialog(getString(R.string.register_progress));
     }
 }

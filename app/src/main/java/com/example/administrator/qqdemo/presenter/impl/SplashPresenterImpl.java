@@ -2,6 +2,7 @@ package com.example.administrator.qqdemo.presenter.impl;
 
 import com.example.administrator.qqdemo.presenter.SplashPresenter;
 import com.example.administrator.qqdemo.view.SplashView;
+import com.hyphenate.chat.EMClient;
 
 /**
  * Created by Administrator on 2017/5/11.
@@ -28,7 +29,10 @@ public class SplashPresenterImpl implements SplashPresenter{
 
     }
 
+    /**
+     * 判断是否已经登录到环信
+     * */
     private boolean isLogin() {
-        return false;
+        return EMClient.getInstance().isLoggedInBefore()&&EMClient.getInstance().isConnected();
     }
 }
