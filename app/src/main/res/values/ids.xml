@@ -12,4 +12,9 @@
     <item name="back" type="id">imageview_back</item>
     <item name="add" type="id">imageview_add</item>
     <item name="logout" type="id">btn_logout</item>
+    <item name="swipe_refresh_layout" type="id">swipe_refresh_layout</item>
+    <item name="recycler_view" type="id">recycler_view</item>
+    <item name="first_letter" type="id">first_letter</item>
+    <item name="contact" type="id">textview_contact</item>
+    <item name="section" type="id">textview_section</item>
 </resources>

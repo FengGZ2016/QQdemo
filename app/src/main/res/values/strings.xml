@@ -13,4 +13,7 @@
     <string name="logining">正在登录...</string>
     <string name="logout">退(%s)出</string>
     <string name="dynamic">动态</string>
+    <string name="contacts">联系人</string>
+    <string name="load_contacts_success">加载成功</string>
+    <string name="load_contacts_failed">加载失败！</string>
 </resources>

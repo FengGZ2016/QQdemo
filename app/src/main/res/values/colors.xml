@@ -7,4 +7,5 @@
     <color name="qq_blue_dark">#00A1DB</color>
     <color name="red_dark">#aa0000</color>
     <color name="red">#ff0000</color>
+    <color name="colorDivider">#E8E8E8</color>
 </resources>
