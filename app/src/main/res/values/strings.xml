@@ -11,4 +11,6 @@
     <string name="confirm_password_error">密码不一致</string>
     <string name="register_progress">正在注册...</string>
     <string name="logining">正在登录...</string>
+    <string name="logout">退(%s)出</string>
+    <string name="dynamic">动态</string>
 </resources>

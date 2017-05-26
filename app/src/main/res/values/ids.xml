@@ -11,4 +11,5 @@
     <item name="fragment_container" type="id">frameLayout_container</item>
     <item name="back" type="id">imageview_back</item>
     <item name="add" type="id">imageview_add</item>
+    <item name="logout" type="id">btn_logout</item>
 </resources>

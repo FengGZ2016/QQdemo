@@ -4,4 +4,24 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent">
 <include layout="@layout/title_bar"/>
+
+    <ImageView
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:src="@mipmap/avatar6"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="20dp"/>
+
+    <Button
+        android:id="@id/logout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="22sp"
+        android:textColor="@android:color/white"
+        android:text="@string/logout"
+        android:background="@drawable/btn_logout_selector"
+        android:layout_margin="10dp"
+        android:textAllCaps="false"/>
+    <!-- android:textAllCaps="false"所有文本都大写-->
 </LinearLayout>
