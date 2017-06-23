@@ -158,6 +158,10 @@ public class ChatActivity extends BaseActivity implements ChatView{
     @Override
     public void sendMessageSuccess() {
         Toast.makeText(this, "发送成功", Toast.LENGTH_SHORT).show();
+        //刷新消息列表
+        mMessageListAdapter.notifyDataSetChanged();
+        //清空编辑框
+        mMessage.getEditableText().clear();
     }
 
     /**
