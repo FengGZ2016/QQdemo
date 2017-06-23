@@ -7,6 +7,9 @@ import com.hyphenate.EMCallBack;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMMessage;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * 作者：国富小哥
  * 日期：2017/6/23
@@ -17,9 +20,12 @@ public class ChatPresenterImpl implements ChatPresenter{
 
     //View层的引用
     private ChatView mChatView;
+    //消息列表
+    private List<EMMessage> mEMMessages;
 
     public ChatPresenterImpl(ChatView mChatView){
         this.mChatView=mChatView;
+        mEMMessages=new ArrayList<>();
     }
     /**
      * 发送消息

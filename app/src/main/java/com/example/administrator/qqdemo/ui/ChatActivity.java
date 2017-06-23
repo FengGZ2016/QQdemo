@@ -1,6 +1,7 @@
 package com.example.administrator.qqdemo.ui;
 
 
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -62,6 +63,17 @@ public class ChatActivity extends BaseActivity implements ChatView{
         mMessage.addTextChangedListener(mTextWatcher);
         //设置软键盘的监听事件
         mMessage.setOnEditorActionListener(mOnEditorActionListener);
+        initRecyclerview();
+    }
+
+    /**
+     * 初始化recyclerview
+     * */
+    private void initRecyclerview() {
+        //设置recyclerview根据用户输入的消息固定大小
+        mRecyclerView.setHasFixedSize(true);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
     }
 
     /**

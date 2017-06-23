@@ -23,4 +23,6 @@
     <item name="timestamp" type="id">add_time</item>
     <item name="message" type="id">edit_message</item>
     <item name="send" type="id">btn_send</item>
+    <item name="content" type="id">textview_content</item>
+    <item name="send_message_progress" type="id"/>
 </resources>
