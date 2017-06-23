@@ -39,6 +39,7 @@ public class ChatPresenterImpl implements ChatPresenter{
                 EMMessage message = EMMessage.createTxtSendMessage(content, userName);
                 //给消息设置发送状态的监听回调
                 message.setMessageStatusCallback(mEMCallBack);
+                mEMMessages.add(message);
                 ThreadUtil.runOnMainThread(new Runnable() {
                     @Override
                     public void run() {
@@ -50,6 +51,14 @@ public class ChatPresenterImpl implements ChatPresenter{
                 EMClient.getInstance().chatManager().sendMessage(message);
             }
         });
+    }
+
+    /**
+     * 获取消息列表
+     * */
+    @Override
+    public List<EMMessage> getEMMessageList() {
+        return mEMMessages;
     }
 
     /**

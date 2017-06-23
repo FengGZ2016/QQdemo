@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.administrator.qqdemo.R;
+import com.example.administrator.qqdemo.adapter.MessageListAdapter;
 import com.example.administrator.qqdemo.presenter.ChatPresenter;
 import com.example.administrator.qqdemo.presenter.impl.ChatPresenterImpl;
 import com.example.administrator.qqdemo.view.ChatView;
@@ -44,6 +45,7 @@ public class ChatActivity extends BaseActivity implements ChatView{
 
     private String mContact;//联系人的名字
     private ChatPresenter mChatPresenter;
+    private MessageListAdapter mMessageListAdapter;
 
     @Override
     public int getLayoutResId() {
@@ -70,10 +72,11 @@ public class ChatActivity extends BaseActivity implements ChatView{
      * 初始化recyclerview
      * */
     private void initRecyclerview() {
+        mMessageListAdapter=new MessageListAdapter(this,mChatPresenter.getEMMessageList());
         //设置recyclerview根据用户输入的消息固定大小
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-
+        mRecyclerView.setAdapter(mMessageListAdapter);
     }
 
     /**
@@ -143,7 +146,10 @@ public class ChatActivity extends BaseActivity implements ChatView{
      * */
     @Override
     public void startSendMessage() {
-
+        //刷新消息列表
+        mMessageListAdapter.notifyDataSetChanged();
+        //滚动RecyclerView到底部
+        mRecyclerView.smoothScrollToPosition(mChatPresenter.getEMMessageList().size() - 1);
     }
 
     /**
