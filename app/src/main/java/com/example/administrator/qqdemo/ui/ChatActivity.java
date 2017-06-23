@@ -18,7 +18,13 @@ import com.example.administrator.qqdemo.R;
 import com.example.administrator.qqdemo.adapter.MessageListAdapter;
 import com.example.administrator.qqdemo.presenter.ChatPresenter;
 import com.example.administrator.qqdemo.presenter.impl.ChatPresenterImpl;
+import com.example.administrator.qqdemo.util.ThreadUtil;
 import com.example.administrator.qqdemo.view.ChatView;
+import com.hyphenate.EMMessageListener;
+import com.hyphenate.chat.EMClient;
+import com.hyphenate.chat.EMMessage;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -66,7 +72,51 @@ public class ChatActivity extends BaseActivity implements ChatView{
         //设置软键盘的监听事件
         mMessage.setOnEditorActionListener(mOnEditorActionListener);
         initRecyclerview();
+        //设置消息监听器
+        EMClient.getInstance().chatManager().addMessageListener(mEMMessageListener);
     }
+
+    private EMMessageListener mEMMessageListener = new EMMessageListener() {
+
+        /**
+         * 在子线程回调
+         * @param list
+         */
+        @Override
+        public void onMessageReceived(final List<EMMessage> list) {
+            //在主线程刷新列表
+            ThreadUtil.runOnMainThread(new Runnable() {
+                @Override
+                public void run() {
+                    EMMessage emMessage = list.get(0);
+                    if(emMessage.getFrom().equals(mContact)) {
+                        mMessageListAdapter.addMessage(emMessage);
+                        mRecyclerView.smoothScrollToPosition(mChatPresenter.getEMMessageList().size() - 1);
+                    }
+                }
+            });
+        }
+
+        @Override
+        public void onCmdMessageReceived(List<EMMessage> list) {
+
+        }
+
+        @Override
+        public void onMessageReadAckReceived(List<EMMessage> list) {
+
+        }
+
+        @Override
+        public void onMessageDeliveryAckReceived(List<EMMessage> list) {
+
+        }
+
+        @Override
+        public void onMessageChanged(EMMessage emMessage, Object o) {
+
+        }
+    };
 
     /**
      * 初始化recyclerview

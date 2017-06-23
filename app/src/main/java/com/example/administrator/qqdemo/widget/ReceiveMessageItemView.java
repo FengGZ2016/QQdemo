@@ -9,6 +9,11 @@ import android.widget.TextView;
 
 import com.example.administrator.qqdemo.R;
 import com.hyphenate.chat.EMMessage;
+import com.hyphenate.chat.EMMessageBody;
+import com.hyphenate.chat.EMTextMessageBody;
+import com.hyphenate.util.DateUtils;
+
+import java.util.Date;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -46,6 +51,13 @@ public class ReceiveMessageItemView extends RelativeLayout {
      * 绑定itemView
      */
     public void bindView(EMMessage emMessage) {
-
+        long msgTime = emMessage.getMsgTime();
+        mTimestamp.setText(DateUtils.getTimestampString(new Date(msgTime)));
+        EMMessageBody body = emMessage.getBody();
+        if (body instanceof EMTextMessageBody) {
+            mContent.setText(((EMTextMessageBody) body).getMessage());
+        } else {
+            mContent.setText("非文本消息");
+        }
     }
 }

@@ -65,6 +65,11 @@ public class MessageListAdapter extends RecyclerView.Adapter{
         return emMessage.direct()==EMMessage.Direct.SEND?ITEM_TYPE_SEND:ITEM_TYPE_RECEIVE;
     }
 
+    public void addMessage(EMMessage emMessage) {
+        mEMMessages.add(emMessage);
+        notifyDataSetChanged();
+    }
+
 
     /**
      * 发送消息的ViewHolder
