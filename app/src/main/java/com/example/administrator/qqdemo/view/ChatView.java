@@ -8,4 +8,9 @@ package com.example.administrator.qqdemo.view;
 
 public interface ChatView {
 
+    void startSendMessage();
+
+    void sendMessageSuccess();
+
+    void sendMessageFailed();
 }

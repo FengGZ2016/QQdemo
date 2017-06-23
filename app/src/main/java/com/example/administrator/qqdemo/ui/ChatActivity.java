@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.administrator.qqdemo.R;
 import com.example.administrator.qqdemo.presenter.ChatPresenter;
@@ -124,4 +125,28 @@ public class ChatActivity extends BaseActivity implements ChatView{
             mSend.setEnabled(s.toString().length() > 0);
         }
     };
+
+    /**
+     * 开始发送消息了
+     * */
+    @Override
+    public void startSendMessage() {
+
+    }
+
+    /**
+     * 发送消息成功了
+     * */
+    @Override
+    public void sendMessageSuccess() {
+        Toast.makeText(this, "发送成功", Toast.LENGTH_SHORT).show();
+    }
+
+    /**
+     * 发送消息失败了
+     * */
+    @Override
+    public void sendMessageFailed() {
+        Toast.makeText(this, "发送失败", Toast.LENGTH_SHORT).show();
+    }
 }
