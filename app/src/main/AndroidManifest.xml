@@ -46,9 +46,12 @@
         </activity>
         <activity android:name=".ui.LoginActivity"></activity>
         <activity android:name=".ui.RegisterActivity"/>
+        <activity android:name=".ui.AddActivity"/>
 
         <!-- 设置环信应用的AppKey -->
-        <meta-data android:name="EASEMOB_APPKEY"  android:value="1143170522178895#qqdemo" />
+        <!--黑马的android:value="1193161015115177#qqdemo"-->
+        <!--我的android:value="1143170522178895#qqdemo"-->
+        <meta-data android:name="EASEMOB_APPKEY"   android:value="1193161015115177#qqdemo"/>
         <!-- 声明SDK所需的service SDK核心功能-->
         <service android:name="com.hyphenate.chat.EMChatService" android:exported="true"/>
         <service android:name="com.hyphenate.chat.EMJobService"

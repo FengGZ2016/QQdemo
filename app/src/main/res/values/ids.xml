@@ -17,4 +17,10 @@
     <item name="first_letter" type="id">first_letter</item>
     <item name="contact" type="id">textview_contact</item>
     <item name="section" type="id">textview_section</item>
+    <item name="friend_not_found" type="id">friend_not_found</item>
+    <item name="search" type="id">search</item>
+    <item name="avatar" type="id">image_top</item>
+    <item name="timestamp" type="id">add_time</item>
+    <item name="message" type="id">edit_message</item>
+    <item name="send" type="id">btn_send</item>
 </resources>

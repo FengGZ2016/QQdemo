@@ -10,4 +10,8 @@ public interface LoginView {
     void loginSuccess();
 
     void loginError();
+
+    void onPasswordError();
+
+    void onUserNameError();
 }

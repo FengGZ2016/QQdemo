@@ -16,4 +16,8 @@
     <string name="contacts">联系人</string>
     <string name="load_contacts_success">加载成功</string>
     <string name="load_contacts_failed">加载失败！</string>
+    <string name="friend_not_found">未搜索到好友</string>
+    <string name="add">添加</string>
+    <string name="send">发送</string>
+    <string name="contact">与%s聊天</string>
 </resources>

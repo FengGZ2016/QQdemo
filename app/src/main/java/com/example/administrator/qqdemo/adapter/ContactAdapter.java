@@ -1,6 +1,7 @@
 package com.example.administrator.qqdemo.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 
 import com.example.administrator.qqdemo.R;
 import com.example.administrator.qqdemo.model.ContactListItem;
+import com.example.administrator.qqdemo.ui.ChatActivity;
 
 import java.util.List;
 
@@ -49,10 +51,10 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ViewHold
             @Override
             public void onClick(View v) {
                 //跳转到聊天界面
-          //      Intent intent = new Intent(mContext, ChatActivity.class);
+                Intent intent = new Intent(mContext, ChatActivity.class);
                 //传入联系人的名字
-            //    intent.putExtra("contact", contactListItem.contact);
-            //    mContext.startActivity(intent);
+                intent.putExtra("contact", contactListItem.contact);
+                mContext.startActivity(intent);
 
             }
         });

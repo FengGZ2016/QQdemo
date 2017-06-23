@@ -3,6 +3,7 @@ package com.example.administrator.qqdemo.presenter.impl;
 import android.util.Log;
 
 import com.example.administrator.qqdemo.presenter.LoginPresenter;
+import com.example.administrator.qqdemo.util.StringUtil;
 import com.example.administrator.qqdemo.util.ThreadUtil;
 import com.example.administrator.qqdemo.view.LoginView;
 import com.hyphenate.EMCallBack;
@@ -21,8 +22,17 @@ private LoginView loginView;
 
     @Override
     public void login(String username, String password) {
-        loginView.startLogin();
-        loginEaseMob(username,password);
+        if (StringUtil.isValidUserName(username)) {
+            if (StringUtil.isValidPassword(password)) {
+                loginView.startLogin();
+                loginEaseMob(username,password);
+            } else {
+                loginView.onPasswordError();
+
+            }
+        } else {
+            loginView.onUserNameError();
+        }
     }
 
 

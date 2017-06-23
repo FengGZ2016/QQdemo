@@ -103,4 +103,20 @@ public class LoginActivity extends BaseActivity implements LoginView{
     public void loginError() {
         hideProgressDialog();
     }
+
+    /**
+     * 密码输入不合法
+     * */
+    @Override
+    public void onPasswordError() {
+        mPassword.setError(getString(R.string.password_error));
+    }
+
+    /**
+     * 用户名输入不合法
+     * */
+    @Override
+    public void onUserNameError() {
+        mUserName.setError(getString(R.string.user_name_error));
+    }
 }

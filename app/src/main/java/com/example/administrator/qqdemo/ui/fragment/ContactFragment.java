@@ -13,6 +13,7 @@ import com.example.administrator.qqdemo.adapter.ContactAdapter;
 import com.example.administrator.qqdemo.model.ContactListItem;
 import com.example.administrator.qqdemo.presenter.ContactPresenter;
 import com.example.administrator.qqdemo.presenter.impl.ContactPresenterImpl;
+import com.example.administrator.qqdemo.ui.AddActivity;
 import com.example.administrator.qqdemo.view.ContactView;
 
 import java.util.List;
@@ -36,10 +37,7 @@ public class ContactFragment extends BaseFragment implements ContactView {
     RecyclerView mRecyclerView;
     @BindView(R.id.swipe_refresh_layout)
     SwipeRefreshLayout mSwipeRefreshLayout;
-//    @BindView(R.id.slide_bar)
-//    com.itheima.leon.qqdemo.widget.SlideBar mSlideBar;
-    @BindView(R.id.section)
-    TextView mSection;
+
 
     private ContactAdapter mContactAdapter;
     private ContactPresenter mContactPresenter;
@@ -84,9 +82,8 @@ public class ContactFragment extends BaseFragment implements ContactView {
     @OnClick({R.id.back, R.id.add})
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.back:
-                break;
             case R.id.add:
+                goTo(AddActivity.class);
                 break;
         }
     }
