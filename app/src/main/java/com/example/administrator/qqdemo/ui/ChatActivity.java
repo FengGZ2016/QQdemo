@@ -4,13 +4,18 @@ package com.example.administrator.qqdemo.ui;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.administrator.qqdemo.R;
+import com.example.administrator.qqdemo.presenter.ChatPresenter;
+import com.example.administrator.qqdemo.presenter.impl.ChatPresenterImpl;
+import com.example.administrator.qqdemo.view.ChatView;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -21,7 +26,7 @@ import butterknife.OnClick;
  * Created by Administrator
  */
 
-public class ChatActivity extends BaseActivity {
+public class ChatActivity extends BaseActivity implements ChatView{
     @BindView(R.id.title)
     TextView mTitle;
     @BindView(R.id.back)
@@ -36,6 +41,7 @@ public class ChatActivity extends BaseActivity {
     Button mSend;
 
     private String mContact;//联系人的名字
+    private ChatPresenter mChatPresenter;
 
     @Override
     public int getLayoutResId() {
@@ -46,25 +52,54 @@ public class ChatActivity extends BaseActivity {
     @Override
     protected void init() {
         super.init();
+        mChatPresenter=new ChatPresenterImpl(this);
         mBack.setVisibility(View.VISIBLE);
         mContact = getIntent().getStringExtra("contact");
         String title=String.format(getString(R.string.contact),mContact);
         mTitle.setText(title);
         //监听文本输入的变化
         mMessage.addTextChangedListener(mTextWatcher);
-
+        //设置软键盘的监听事件
+        mMessage.setOnEditorActionListener(mOnEditorActionListener);
     }
+
+    /**
+     * 软键盘的监听器
+     * */
+    private TextView.OnEditorActionListener mOnEditorActionListener = new TextView.OnEditorActionListener() {
+        @Override
+        public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+            if (actionId == EditorInfo.IME_ACTION_SEND) {
+                sendMessage();
+                return true;
+            }
+            return false;
+        }
+    };
 
     @OnClick({R.id.back, R.id.send})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.back:
-
-                break;
-            case R.id.send:
                 finish();
                 break;
+            case R.id.send:
+               //发送消息
+                sendMessage();
+                break;
         }
+    }
+
+    /**
+     * 发送消息
+     * */
+    private void sendMessage() {
+        //隐藏软键盘
+        hideKeyboard();
+        //消息内容
+        String content=mMessage.getText().toString();
+        //调用presenter层方法发送消息
+        mChatPresenter.sendMessage(content,mContact);//消息内容+好友昵称
     }
 
     /**

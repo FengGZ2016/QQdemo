@@ -47,6 +47,7 @@
         <activity android:name=".ui.LoginActivity"></activity>
         <activity android:name=".ui.RegisterActivity"/>
         <activity android:name=".ui.AddActivity"/>
+        <activity android:name=".ui.ChatActivity"/>
 
         <!-- 设置环信应用的AppKey -->
         <!--黑马的android:value="1193161015115177#qqdemo"-->
